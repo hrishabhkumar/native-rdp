@@ -9,7 +9,7 @@
     "build:artifacts": "neon build --release",
     "install": "node-pre-gyp install --fallback-to-build=false || neon build --release",
     "package": "node-pre-gyp package",
-    "upload-binary": "node-pre-gyp package && node-pre-gyp-github publish",
+    "upload-binary": "node-pre-gyp package && node-pre-gyp-github publish"
   },
   "binary": {
     "module_name": "index",
