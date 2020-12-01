@@ -24,6 +24,7 @@ before_install:
   - node -v
   - npm -v
   - npm install
+  - npm run build || exit 0
 script:
   - npm test
   # Publish when using '[publish binary]' keywords

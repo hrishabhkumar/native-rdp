@@ -2,15 +2,16 @@
   "name": "native-rdp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "node ./build.js",
     "test": "echo Hello $npm_config_electron_version bye",
     "build:artifacts": "neon build --release",
-    "install": "node-pre-gyp install --fallback-to-build=false || neon build --release",
+    "install": "electron-build-env node-pre-gyp install --fallback-to-build=false || node-pre-gyp install --fallback-to-build=false || neon build --release",
     "package": "node-pre-gyp package",
+    "package-electron": "node-pre-gyp package --runtime=electron --target=$",
     "upload-binary": "node-pre-gyp package && node-pre-gyp-github publish"
   },
+  "main": "lib/index.js",
   "binary": {
     "module_name": "index",
     "host": "https://github.com/hrishabhkumar/native-rdp/releases/download/",

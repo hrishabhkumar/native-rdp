@@ -32,7 +32,6 @@ use std::sync::{mpsc, Arc, Mutex};
 use std::thread::{JoinHandle};
 use std::sync::atomic::{AtomicBool, Ordering};
 use rdp::model::error::{Error, RdpErrorKind, RdpError, RdpResult};
-use clap::{Arg, App, ArgMatches};
 use rdp::core::gcc::KeyboardLayout;
 use std::sync::mpsc::{Receiver, Sender};
 use serde_derive::{Deserialize, Serialize};
@@ -445,7 +444,7 @@ pub struct Server {
     blank_creds: bool
 }
 
-pub fn startRdp(server: &Server) {
+pub fn start_rdp(server: &Server) {
     let matches = &server;
     // Create a tcp stream from args
     let tcp = tcp_from_args(matches).unwrap();

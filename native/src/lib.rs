@@ -4,7 +4,7 @@ use neon::register_module;
 mod mstsc;
 
 pub use mstsc::Server;
-pub use mstsc::startRdp;
+pub use mstsc::start_rdp;
 
 struct BackgroundTask {
     server: Server
@@ -22,7 +22,7 @@ impl Task for BackgroundTask {
     // thread
     fn perform(&self) -> Result<i32, String> {
         // Downcast `this` so .set can be called on it
-        startRdp(&self.server);
+        start_rdp(&self.server);
         // Equivalent to  `this.modified = true` in JS
         // this.set(&mut cx, "modified", t)?;
         Ok(0)
@@ -43,9 +43,9 @@ pub fn perform_async_task(mut cx: FunctionContext) -> JsResult<JsUndefined> {
     // siguature: `function callback(err, value) {}`. The JS value returned from
     // complete() is passed as the `value` and the error message "This will fail"
     // is passed as the `err`
-    let serverJs = cx.argument::<JsValue>(0)?;
+    let server_js = cx.argument::<JsValue>(0)?;
 
-    let server :Server = neon_serde::from_value(&mut cx, serverJs)?;
+    let server :Server = neon_serde::from_value(&mut cx, server_js)?;
     let f = cx.argument::<JsFunction>(1)?;
     let task = BackgroundTask { server: server };
     task.schedule(f);
